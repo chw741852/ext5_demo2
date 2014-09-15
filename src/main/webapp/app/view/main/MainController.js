@@ -14,6 +14,8 @@ Ext.define('app.view.main.MainController', {
 
     alias: 'controller.main',
 
+    uses: ['app.view.module.Module'],
+
     onClickButton: function () {
         Ext.Msg.confirm('Confirm', 'Are you sure?', 'onConfirm', this);
     },
@@ -76,6 +78,16 @@ Ext.define('app.view.main.MainController', {
             useYAxis: true,
             slideInDuration: 500
         });
+
+        var maincenter = this.getView().down('maincenter');
+
+        maincenter.setActiveTab(
+            maincenter.add({
+                xtype: 'modulepanel',
+                closable: true,
+                reorderable: true
+            })
+        );
     },
 
     showLeftMenuRegion: function(button) {
