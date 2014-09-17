@@ -4,7 +4,7 @@
  * 用于生成Grid的Columns的类
  */
 Ext.define('app.view.module.factory.ColumnsFactory', {
-    static: {
+    statics: {
         getColumns: function(moduleModel, schemeOrderId) {
             var scheme = moduleModel.get('tf_gridScheme')[0];       // 取得第一个grid的方案
             var columns = [];

@@ -31,7 +31,8 @@ Ext.define('app.view.module.region.GridToolbar', {
                 text: '上传Excel表批量新增',
                 tooltip: '根据下载的Excel表中的要求添加数据后，上传批量新增数据',
                 glyph: 0xf062
-            }]
+            }],
+            handler: 'addRecord'
         }, {
             text: '修改',
             glyph: 0xf044
