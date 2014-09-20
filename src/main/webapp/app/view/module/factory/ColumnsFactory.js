@@ -86,7 +86,7 @@ Ext.define('app.view.module.factory.ColumnsFactory', {
                         width: 100,
                         formatter: 'dateRenderer',      // 定义在Ext.util.Format中的渲染函数可以用这种方法调用
                         editor: {       // 如果需要行内修改，需要加入此属性
-                            xtype: 'datefiled',
+                            xtype: 'datefield',
                             format: 'Y-m-d',
                             editable: false
                         }
@@ -117,7 +117,7 @@ Ext.define('app.view.module.factory.ColumnsFactory', {
 //                        formatter: 'intRenderer',
                         renderer: Ext.util.Format.intRenderer,
                         editor: {
-                            xtype: 'numberfiled'
+                            xtype: 'numberfield'
                         }
                     });
                     break;
@@ -130,7 +130,7 @@ Ext.define('app.view.module.factory.ColumnsFactory', {
                         format: '#',
                         renderer: fd.tf_isCurrency ? Ext.util.Format.monetaryRenderer : Ext.util.Format.monetaryRenderer.floatRenderer,
                         editor: {
-                            xtype: 'numberfiled'
+                            xtype: 'numberfield'
                         }
                     });
                     break;

@@ -33,6 +33,7 @@ Ext.define('app.view.module.Module', {
         this.store = Ext.create('Ext.data.Store', {
             model: this.model,
             autoLoad: true,
+            autoSync: true,
             proxy: {
                 type: 'localstorage',
                 id: 'module' + '__' + this.getViewModel().get('tf_moduleName')
