@@ -23,7 +23,7 @@ Ext.define('app.view.module.ModuleController', {
         model.set('tf_name', '太湖花园小区建设');
         model.set('tf_code','2004-01');
         model.set('tf_squaremeter',12000);
-        model.set('tf_budget',3800000);
+        model.set('tf_budget',-3800000000000);
         model.set('tf_rjl',0.67);
         model.set('tf_startDate',new Date());
         model.set('tf_endDate',new Date());

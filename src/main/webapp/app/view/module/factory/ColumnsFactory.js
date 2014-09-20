@@ -72,7 +72,10 @@ Ext.define('app.view.module.factory.ColumnsFactory', {
                 gridFieldId: gf.tf_gridFieldId,     // 加上这个属性，用于在列改变了宽度过后，传到后台
                 sortable: true,
                 text: ft,
-                dataIndex: fd.tf_fieldName
+                dataIndex: fd.tf_fieldName,
+                editor: {},
+                gridField: gf,
+                fieldDefine: fd
             };
 
             switch (fd.tf_fieldType) {
@@ -80,14 +83,21 @@ Ext.define('app.view.module.factory.ColumnsFactory', {
                     Ext.apply(field, {
                         xtype: 'datecolumn',
                         align: 'center',
-                        width: 100
+                        width: 100,
+                        formatter: 'dateRenderer',      // 定义在Ext.util.Format中的渲染函数可以用这种方法调用
+                        editor: {       // 如果需要行内修改，需要加入此属性
+                            xtype: 'datefiled',
+                            format: 'Y-m-d',
+                            editable: false
+                        }
                     });
                     break;
                 case 'Datetime':
                     Ext.apply(field, {
                         xtype: 'datecolumn',
                         align: 'center',
-                        width: 130
+                        width: 130,
+                        formatter: 'dateRenderer'
                     });
                     break;
                 case 'Boolean':
@@ -104,31 +114,61 @@ Ext.define('app.view.module.factory.ColumnsFactory', {
                         xtype: 'numbercolumn',
                         align: 'center',
                         tdCls: 'intcolor',
-                        format: '#'
+//                        formatter: 'intRenderer',
+                        renderer: Ext.util.Format.intRenderer,
+                        editor: {
+                            xtype: 'numberfiled'
+                        }
                     });
                     break;
                 case 'Double' :
                     Ext.apply(field, {
                         align : 'center',
                         xtype : 'numbercolumn',
-                        width : 110
+                        width : 110,
+//                        formatter: fd.tf_isMoney ? 'monetaryRenderer' : 'floatRenderer',
+                        format: '#',
+                        renderer: fd.tf_isCurrency ? Ext.util.Format.monetaryRenderer : Ext.util.Format.monetaryRenderer.floatRenderer,
+                        editor: {
+                            xtype: 'numberfiled'
+                        }
                     });
                     break;
                 case 'Float' :
                     Ext.apply(field, {
                         align : 'center',
                         xtype : 'numbercolumn',
-                        width : 110
+                        width : 110,
+//                        formatter: 'floatRenderer'
+                        renderer: Ext.util.Format.floatRenderer
                     });
                     break;
                 case 'Percent' :
                     Ext.apply(field, {
                         align : 'center',
-                        xtype : 'numbercolumn',
-                        width : 110
+                        formatter : 'percentRenderer',
+                        // xtype : 'widgetcolumn', // 这里注释掉的是extjs5自带的百分比类型的显示方法
+                        // widget : {
+                        // xtype : 'progressbarwidget',
+                        // textTpl : ['{percent:number("0.00")}%']
+                        // },
+                        editor: {
+                            xtype: 'numberfield',
+                            step: 0.01
+                        },
+                        width: 110
                     });
                     break;
                 case 'String' :
+                    // 如果这个字段是此模块的nameFields，则加粗显示
+                    if (module.get('tf_nameFields') == fd.tf_fieldName) {
+                        Ext.apply(field, {
+                            text: '<strong>' + fd.tf_title + '</strong>',
+                            formatter: 'nameFieldRenderer'
+                        });
+                    } else {
+                        Ext.apply(field, {});
+                    }
                     break;
                 default :
                     break;

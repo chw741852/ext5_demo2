@@ -47,7 +47,8 @@ Ext.define('app.view.module.Module', {
             split: true
         }, {
             xtype: 'modulegrid',    // 模块的grid显示区域
-            region: 'center'
+            region: 'center',
+            store: this.store
         }, {
             xtype: 'recorddetail',  // 记录明细
             region: 'east',

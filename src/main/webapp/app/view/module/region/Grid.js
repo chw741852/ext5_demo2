@@ -27,7 +27,7 @@ Ext.define('app.view.module.region.Grid', {
 
     initComponent: function() {
         var viewModel = this.up('modulepanel').getViewModel();
-        // TODO 报错  创建grid列
+        // 创建grid列
         this.columns = app.view.module.factory.ColumnsFactory.getColumns(viewModel, 10);
         this.callParent();
     }

@@ -118,6 +118,10 @@ Ext.define('app.view.main.MainModel', {
 
         menuType : {
             value : 'toolbar'
+        },
+
+        monetary: {     // 金额单位
+            value: 'tenthousand'    // 默认万元，以后可以从后台取得个人偏好设置，或者存放在cookies中
         }
     },
 

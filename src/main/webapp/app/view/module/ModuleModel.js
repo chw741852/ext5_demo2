@@ -64,7 +64,7 @@ Ext.define('app.view.module.ModuleModel', {
             tf_fieldName: 'tf_budget',
             tf_title: '投资总额',
             tf_fieldType: 'Double',
-            tf_isMoney: true, // 此字段是一个金额字段  
+            tf_isCurrency: true, // 此字段是一个金额字段
             tf_fieldGroup: '工程附加信息',
             tf_allowSummary: true
         }, {

@@ -7,6 +7,8 @@ Ext.define('app.view.main.menu.SettingMenu', {
     extend: 'app.ux.ButtonTransparent',
     alias: 'widget.settingmenu',
 
+    uses: ['app.view.main.menu.Monetary'],
+
     text: '设置',
     iconCls: 'fa',
     glyph: 0xf013,
@@ -15,19 +17,34 @@ Ext.define('app.view.main.menu.SettingMenu', {
     initComponent: function() {
         this.menu = [];
         this.menu.push({
-            xtype: 'segmentedbutton',
             text: '菜单样式',
-            reference: 'menuType',
-            value: 'toolbar',
-            items: [{
-                text: '标准菜单',
-                value: 'toolbar'
-            }, {
-                text: '树形菜单',
-                value: 'tree'
-            }, {
-                text: '按钮菜单',
-                value: 'button'
+            menu: [{
+                xtype: 'segmentedbutton',
+                reference: 'menuType',
+                value: 'toolbar',
+                items: [
+                    {
+                        text: '标准菜单',
+                        value: 'toolbar'
+                    },
+                    {
+                        text: '树形菜单',
+                        value: 'tree'
+                    },
+                    {
+                        text: '按钮菜单',
+                        value: 'button'
+                    }
+                ]
+            }]
+        }, {
+            text: '金额单位',
+            menu: [{
+                xtype: 'segmentedbutton',
+                reference: 'monetary',      // 加入了这一句，在改变数据的时候可以触发bind绑定事件
+                defaultUI: 'default',
+                value: 'tenthousand',
+                items: app.view.main.menu.Monetary.getMonetaryMenu()
             }]
         });
 
