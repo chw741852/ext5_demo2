@@ -149,7 +149,9 @@ Ext.define('app.view.module.ModuleModel', {
                     tf_fieldId: 10100100    // 工程方量
                 }]
             }]
-        }]
+        }],
+
+        selectedNames: ''       // 选中的记录名字显示在title上
     },
 
     // 根据字段ID找到相应的定义

@@ -7,21 +7,27 @@ Ext.define('app.view.module.region.GridToolbar', {
     extend: 'Ext.toolbar.Toolbar',
     alias: 'widget.gridtoolbar',
 
-    requires: ['Ext.button.Split'],
+    requires: ['Ext.button.Split', 'Ext.dd.DropZone'],
 
     uses: ['app.ux.GridSearchField'],
 
     initComponent: function() {
+        var viewModel = this.up('modulepanel').getViewModel();
         this.items = [{
             text: '显示',
             glyph: 0xf022
         }, {
             text: '新增',
             xtype: 'splitbutton',
+            itemId: 'new',
             glyph: 0xf016,
             menu: [{
                 text: '复制新增',
                 tooltip: '新增时先将当前记录添入到新记录中',
+                itemId: 'newwithcopy',
+                listeners: {
+                    click: 'addRecordWithCopy'
+                },
                 glyph: 0xf016
             }, '-', {
                 text: '上传Excel表单条新增',
@@ -32,7 +38,29 @@ Ext.define('app.view.module.region.GridToolbar', {
                 tooltip: '根据下载的Excel表中的要求添加数据后，上传批量新增数据',
                 glyph: 0xf062
             }],
-            handler: 'addRecord'
+            listeners: {
+                click: 'addRecord',
+                render: function(button) {
+                    // 可以使Grid中选中的记录拖到到此按钮上来进行复制新增
+                    button.dropZone = new Ext.dd.DropZone(button.getEl(), {
+                        // 此处的ddGroup需要与Grid中设置的一致
+                        ddGroup: 'DD_grid_' + viewModel.get('tf_moduleName'),
+
+                        getTargetFromEvent: function(e) {
+                            return e.getTarget('');
+                        },
+                        // 用户拖动选中按钮经过了此按钮
+                        onNodeOver: function(target, dd, e, data) {
+                            return Ext.dd.DropZone.prototype.dropAllowed;
+                        },
+                        // 用户放开了鼠标键，复制新增
+                        onNodeDrop: function(target, dd, e, data) {
+                            var b = button.menu.down('#newwithcopy');
+                            b.fireEvent('click', b);
+                        }
+                    });
+                }
+            }
         }, {
             text: '修改',
             glyph: 0xf044
@@ -41,7 +69,29 @@ Ext.define('app.view.module.region.GridToolbar', {
             text: '删除',
             disabled: true,
             glyph: 0xf014,
-            handler: 'deleteRecords'
+            listeners: {
+                click: 'deleteRecords',     // 这里不要用handler，而要用click,因为下面要发送click事件
+                // 删除按钮在渲染后加入可以Drop的功能
+                render: function(button) {
+                    // 可以使Grid中选中的记录拖到此按钮上来进行删除
+                    button.dropZone = new Ext.dd.DropZone(button.getEl(), {
+                        // 此处的ddGroup需要与Grid中设置的一样
+                        ddGroup: 'DD_grid_' + viewModel.get('tf_moduleName'),
+
+                        getTargetFromEvent: function(e) {
+                            return e.getTarget('');
+                        },
+                        // 用户拖动选中的记录经过了此按钮
+                        onNodeOver: function(target, dd, e, data) {
+                            return Ext.dd.DropZone.prototype.dropAllowed;
+                        },
+                        // 用户放开了鼠标键，删除了记录
+                        onNodeDrop: function(target, dd, e, data) {
+                            button.fireEvent('click', button);      // 执行删除按钮的click事件
+                        }
+                    });
+                }
+            }
         }, {
             glyph: 0xf0c6,
             xtype: 'splitbutton',
