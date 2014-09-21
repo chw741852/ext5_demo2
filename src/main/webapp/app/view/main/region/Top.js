@@ -7,6 +7,7 @@ Ext.define('app.view.main.region.Top', {
     extend: 'Ext.toolbar.Toolbar',
     alias: 'widget.maintop',
 
+    requires: ['Ext.Img'],
     uses: ['app.ux.ButtonTransparent', 'app.view.main.menu.ButtonMainMenu', 'app.view.main.menu.SettingMenu'],
 
     defaults: {

@@ -63,7 +63,9 @@ Ext.define('app.view.module.region.GridToolbar', {
             }
         }, {
             text: '修改',
-            glyph: 0xf044
+            glyph: 0xf044,
+            itemsId: 'edit',
+            handler: 'editRecord'
         }, {
             itemId: 'deletebutton',
             text: '删除',

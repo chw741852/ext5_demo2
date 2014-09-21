@@ -86,6 +86,15 @@ Ext.define('app.view.module.ModuleController', {
         });
     },
 
+    // TODO 修改grid数据，目前弹出框中未能载入数据
+    editRecord: function(button) {
+        var window = Ext.widget('basewindow', {
+            viewModel: this.getView().getViewModel()
+        });
+        window.down('baseform').setData(this.getView().down('modulegrid').getSelectionModel().getSelection()[0]);
+        window.show();
+    },
+
     selectionChange: function(model, selected, eOpts) {
         // 设置删除按钮状态
         this.getView().down('toolbar button#deletebutton')[selected.length > 0 ? 'enable' : 'disable']();

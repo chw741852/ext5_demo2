@@ -10,6 +10,9 @@ Ext.define('app.view.main.Main', {
 
     xtype: 'app-main',
 
+    requires: [
+        'Ext.ux.TabReorderer', 'Ext.toolbar.Spacer', 'Ext.button.Segmented', 'Ext.layout.*', 'Ext.ux.TabCloseMenu'
+    ],
     uses: ['app.view.main.region.Top', 'app.view.main.region.Bottom', 'app.view.main.region.Left',
     'app.view.main.region.Center', 'app.view.main.menu.MainMenuToolbar'],
 

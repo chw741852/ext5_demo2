@@ -7,9 +7,13 @@ Ext.define('app.view.module.Module', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.modulepanel',
 
-    requires: ['app.view.module.ModuleController', 'app.view.module.ModuleModel', 'app.view.module.factory.ModelFactory'],
+    requires: [
+        'Ext.data.proxy.*', 'Ext.grid.column.*',
+        'app.view.module.ModuleController', 'app.view.module.ModuleModel', 'app.view.module.factory.ModelFactory'
+    ],
 
-    uses: ['app.view.module.region.Navigate', 'app.view.module.region.Grid', 'app.view.module.region.Detail'],
+    uses: ['app.view.module.region.Navigate', 'app.view.module.region.Grid', 'app.view.module.region.Detail',
+        'app.view.module.window.BaseWindow'],
 
     controller: 'module',
 

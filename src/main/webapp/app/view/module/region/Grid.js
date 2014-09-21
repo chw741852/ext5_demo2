@@ -11,7 +11,8 @@ Ext.define('app.view.module.region.Grid', {
     uses: ['app.view.module.region.GridToolbar', 'app.view.module.factory.ColumnsFactory'],
 
     bind: {
-        title: '{tf_title} {selectedNames}'     // 数据绑定到ModuleModel中tf_title和选中记录的名称
+        title: '{tf_title} {selectedNames}',     // 数据绑定到ModuleModel中tf_title和选中记录的名称
+        gridSchemeId: '{gridSchemeId}'      // 属性gridSchemeId，设置绑定，和GridSchemeCombo的value绑定是一样的
     },
 
     dockedItems: [{
@@ -54,5 +55,16 @@ Ext.define('app.view.module.region.Grid', {
         };
 
         this.callParent();
+    },
+
+    setGridSchemeId: function(value) {
+        if (this.gridSchemeId != value) {
+            this.gridSchemeId = value;
+            Ext.suspendLayouts();
+            this.columns = app.view.module.factory.ColumnsFactory.getColumns(this.up('modulepanel').getViewModel(), value);
+            this.reconfigure(this.store, this.columns);
+            Ext.resumeLayouts(true);
+            this.columnAutoSize();
+        }
     }
 });

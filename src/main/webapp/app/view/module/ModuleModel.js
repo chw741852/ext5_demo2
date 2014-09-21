@@ -149,9 +149,154 @@ Ext.define('app.view.module.ModuleModel', {
                     tf_fieldId: 10100100    // 工程方量
                 }]
             }]
+        }, {
+            tf_schemeOrder: 20,
+            tf_schemeName: 'Grid方案2',
+            tf_schemeGroups: [{
+                tf_gridGroupId: 1,      // ID号
+                tf_gridGroupOrder: 10,  // 表头分组序号
+                tf_gridGroupName: '工程项目主要信息',
+                tf_isShowHeaderSpans: true,     // 是否显示分钟
+                tf_isLocked: false,     // 是否锁定此分组
+                tf_groupFields: [{
+                    tf_groupFieldOrder: 5,
+                    tf_fieldId: 10100010,
+                    tf_isLocked: true
+                }, {
+                    tf_groupFieldOrder: 10,
+                    tf_fieldId: 10100020,      // 工程项目名称字段
+                    tf_columnWidth: 200,
+                    tf_isLocked: true
+                }, {
+                    tf_groupFieldOrder: 20,
+                    tf_fieldId: 10100030,      // 工程项目编码字段
+                    tf_columnWidth: 120,
+                    tf_isLocked: true
+                }, {
+                    tf_gridFieldOrder: 10,
+                    tf_fieldId: 10100040
+                }, {
+                    tf_gridFieldOrder: 20,
+                    tf_fieldId: 10100050
+                }]
+            }]
+        }, {
+            tf_schemeOrder: 30,
+            tf_schemeName: 'Grid方案3',
+            // 表头分组
+            tf_schemeGroups: [{
+                tf_gridGroupId: 1,          // id号
+                tf_gridGroupOrder: 10,      // 表头分组序号
+                tf_gridGroupName: '工程项目基本信息',
+                tf_isShowHeaderSpans: true,     // 是否显示分组
+                tf_isLocked: true,          // 是否锁定此分组
+                tf_groupFields: [{
+                    tf_gridFieldOrder: 10,
+                    tf_fieldId: 10100020,       // 工程项目字段名称
+                    tf_columnWidth: 200
+                }, {
+                    tf_gridFieldOrder: 20,
+                    tf_fieldId: 10100030,       // 工程项目编码字段
+                    tf_columnWidth: 120
+                }]
+            }, {
+                tf_gridGroupOrder: 20,         // 表头分组序号
+                tf_gridGroupName: '工程项目附加信息',
+                tf_isShowHeaderSpans: true,
+                tf_isLocked: false,
+                tf_groupFields: [{
+                    tf_gridFieldOrder : 10,
+                    tf_fieldId : 10100040
+                }, {
+                    tf_gridFieldOrder : 20,
+                    tf_fieldId : 10100050
+                }, {
+                    tf_gridFieldOrder : 30,
+                    tf_fieldId : 10100060
+                }, {
+                    tf_gridFieldOrder : 40,
+                    tf_fieldId : 10100070
+                }, {
+                    tf_gridFieldOrder : 50,
+                    tf_fieldId : 10100080
+                }]
+            }]
         }],
 
-        selectedNames: ''       // 选中的记录名字显示在title上
+        selectedNames: '',       // 选中的记录名字显示在title上
+
+        // 模块的form方案，可以定义多个方案
+        tf_formSchemes: [{
+            tf_schemeOrder: 10,
+            tf_schemeName: 'form方案1',
+            tf_windowWidth: 600,
+            tf_windowHeight: -1,            // 高度 -1，即自动适应高度
+            // 表头分组
+            tf_schemeGroups: [{
+                tf_formGroupId: 1,
+                tf_formGroupOrder: 10,
+                tf_formGroupName: '工程项目基本信息',
+                tf_numCols: 1,              // 分栏数
+                // 每一个表头分组下面的字段
+                tf_groupFields: [{
+                    tf_formFieldOrder: 5,
+                    tf_fieldId: 10100010,
+                    tf_colspan: 1,          // 此字段占用的栏数
+                    tf_width: -1,           // 宽度，设置-1为100%
+                    tf_isEndRow: true       // 结束本行，下个字段从新的一行开始排列
+                }, {
+                    tf_formFieldOrder: 10,
+                    tf_fieldId: 10100020,   // 工程项目名称字段
+                    tf_colspan: 1,
+                    tf_width: -1,
+                    tf_isEndRow: true
+                }, {
+                    tf_formFieldOrder: 20,
+                    tf_fieldId: 10100030,   // 工程项目编码字段
+                    tf_colspan: 1,
+                    tf_width: -1,
+                    tf_isEndRow: true
+                }]
+            }, {
+                tf_formGroupOrder : 20, // 表头分组序号
+                tf_formGroupName : '工程项目附加信息',
+                tf_numCols : 2, // 分栏数
+                tf_collapsible : true, // 此fieldSet可折叠
+                tf_collapsed : false, // 默认不折叠
+                // 每一个表头分组下面的字段
+                tf_groupFields : [{
+                    tf_formFieldOrder : 10,
+                    tf_fieldId : 10100040
+                    // 建筑面积
+                }, {
+                    tf_formFieldOrder : 20,
+                    tf_fieldId : 10100050
+                    // 投资总额
+                }, {
+                    tf_formFieldOrder : 30,
+                    tf_fieldId : 10100060,
+                    tf_isEndRow : true
+                    // 结束本行，下个字段从新的一行开始排列
+                    // 容积率
+                }, {
+                    tf_formFieldOrder : 40,
+                    tf_fieldId : 10100070
+                    // 计划开工时间
+                }, {
+                    tf_formFieldOrder : 50,
+                    tf_fieldId : 10100080
+                    // 计划竣工时间
+                }, {
+                    tf_formFieldOrder : 60,
+                    tf_fieldId : 10100090
+                    // 是否通过验收
+                }, {
+                    tf_formFieldOrder : 70,
+                    tf_fieldId : 10100100
+                    // 工程方量
+                }]
+            }]
+        }]
     },
 
     // 根据字段ID找到相应的定义
